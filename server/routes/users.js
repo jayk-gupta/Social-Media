@@ -1,9 +1,9 @@
 import express from "express";
 import {getUser,getUserFriends,addRemoveFriends} from "../controllers/users.js"
 import { verifyToken } from "../middlewares/auth.js";
+
 const router = express.Router();
 
-router.post("/users", login);
 
 /*READ*/
 router.get("/:id",verifyToken,getUser) 

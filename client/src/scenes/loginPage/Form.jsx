@@ -23,6 +23,9 @@ const registerSchema = yup.object().shape({
   location: yup.string().required("required"),
   occupation: yup.string().required("required"),
   picture: yup.string().required("required"),
+  yearOfCollege: yup.string().required("required"), // New field
+  branch: yup.string().required("required"), // New field
+  skills: yup.string().required("required"), // New field
 });
 
 const loginSchema = yup.object().shape({
@@ -38,6 +41,9 @@ const initialValuesRegister = {
   location: "",
   occupation: "",
   picture: "",
+  yearOfCollege: "", // New field
+  branch: "", // New field
+  skills: "", // New field
 };
 
 const initialValuesLogin = {
@@ -205,6 +211,40 @@ const Form = () => {
                     )}
                   </Dropzone>
                 </Box>
+                {/* added my fields */}
+                <TextField
+                  label="Year of College"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.yearOfCollege}
+                  name="yearOfCollege"
+                  error={
+                    Boolean(touched.yearOfCollege) &&
+                    Boolean(errors.yearOfCollege)
+                  }
+                  helperText={touched.yearOfCollege && errors.yearOfCollege}
+                  sx={{ gridColumn: "span 2" }}
+                />
+                <TextField
+                  label="Branch"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.branch}
+                  name="branch"
+                  error={Boolean(touched.branch) && Boolean(errors.branch)}
+                  helperText={touched.branch && errors.branch}
+                  sx={{ gridColumn: "span 2" }}
+                />
+                <TextField
+                  label="Skills"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.skills}
+                  name="skills"
+                  error={Boolean(touched.skills) && Boolean(errors.skills)}
+                  helperText={touched.skills && errors.skills}
+                  sx={{ gridColumn: "span 4" }}
+                />
               </>
             )}
 

@@ -169,9 +169,12 @@ const Navbar = () => {
                   width: "150px",
                   borderRadius: "0.25rem",
                   p: "0.25rem 1rem",
+                  display: "flex",
+                  alignItems: "center",
+
                   "& .MuiSvgIcon-root": {
                     pr: "0.25rem",
-                    width: "3rem",
+                    width: "2rem",
                   },
                   "& .MuiSelect-select:focus": {
                     backgroundColor: neutralLight,

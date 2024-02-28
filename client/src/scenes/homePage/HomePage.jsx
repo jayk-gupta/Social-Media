@@ -4,7 +4,6 @@ import { Box,useMediaQuery } from '@mui/material';
 import Navbar from '../navbar/NavBar';
 import UserWidget from '../widgets/UserWidget';
 import MyPostWidget from '../widgets/MyPostWidget';
-import AdvertWidget from '../widgets/AdvertWidget';
 import PostsWidget from '../widgets/PostsWidget';
 import FriendListWidget from '../widgets/FriendListWidget';
 
@@ -34,7 +33,6 @@ const HomePage = () => {
         </Box>
         {isNonMobileScreens && (
           <Box flexBasis="26%">
-            <AdvertWidget />
             <Box m="2rem 0" />
             <FriendListWidget userId={_id} />
           </Box>

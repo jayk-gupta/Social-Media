@@ -196,7 +196,14 @@ const Form = () => {
                         {...getRootProps()}
                         border={`2px dashed ${palette.primary.main}`}
                         p="1rem"
-                        sx={{ "&:hover": { cursor: "pointer" } }}
+                        sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+
+                          "&:hover": { cursor: "pointer" },
+                        }}
                       >
                         <input {...getInputProps()} />
                         {!values.picture ? (

@@ -12,7 +12,7 @@ import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
 import postRoutes from "./routes/posts.js";
 import { register } from "./controllers/auth.js";
-import { createPost } from "./controllers/posts.js";
+import { createPost, deletePost } from "./controllers/posts.js";
 import { verifyToken } from "./middlewares/auth.js";
 //
 import User from "./models/User.js";

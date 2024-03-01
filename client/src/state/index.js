@@ -1,11 +1,41 @@
-import { createSlice } from "@reduxjs/toolkit";
-
+import { createSlice ,createAsyncThunk} from "@reduxjs/toolkit";
 const initialState = {
   mode: "light",
   user: null,
   token: null,
   posts: [],
 };
+  const deletePostAPI = async (postId, token) => {
+    const response = await fetch(`http://localhost:3001/posts/${postId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      throw new Error("Failed to delete post");
+    }
+  };
+
+
+// Async thunk for deleting a post
+export const deletePostAsync = createAsyncThunk(
+  "auth/deletePost",
+  async (postId, { getState }) => {
+    const { token } = getState().auth;
+    try {
+      const response = await deletePostAPI(postId, token);
+      return response.data; // Assuming the API returns relevant data
+    } catch (error) {
+      console.error("Error deleting post:", error.message);
+      throw error;
+    }
+  }
+);
 
 export const authSlice = createSlice({
   name: "auth",
@@ -38,15 +68,6 @@ export const authSlice = createSlice({
         return post;
       });
       state.posts = updatedPosts;
-    },
-    deletePost: (state, action) => {
-      const updatedPosts = state.posts.filter(
-        (post) => post.postId !== action.payload
-      );
-      return {
-        ...state,
-        posts: updatedPosts,
-      };
     },
   },
 });

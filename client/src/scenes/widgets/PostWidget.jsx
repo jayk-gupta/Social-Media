@@ -2,22 +2,16 @@ import {
   ChatBubbleOutlineOutlined,
   FavoriteBorderOutlined,
   FavoriteOutlined,
-  ShareOutlined,
 } from "@mui/icons-material";
-
-import {
-  Box,
-  Divider,
-  IconButton,
-  Typography,
-  useTheme
-} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
 import FlexBetween from "../../components/FlexBetween";
 import Friend from "../../components/Friend";
 import WidgetWrapper from "../../components/WidgetWrapper";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPost } from "../../state/index";
+import { setPost,deletePostAsync } from "../../state/index";
+
 
 const PostWidget = ({
   postId,
@@ -53,7 +47,17 @@ const PostWidget = ({
     const updatedPost = await response.json();
     dispatch(setPost({ post: updatedPost }));
   };
-  
+const deletePostHandler = async () => {
+  try {
+    // Dispatch the async thunk to delete the post
+    await dispatch(deletePostAsync(postId));
+    // No need to update the state here, as it's handled by the async thunk
+  } catch (error) {
+    console.error("Error deleting post:", error.message);
+    // Handle error as needed
+  }
+};
+
   return (
     <WidgetWrapper m="2rem 0">
       <Friend
@@ -95,11 +99,10 @@ const PostWidget = ({
           </FlexBetween>
         </FlexBetween>
 
-        <IconButton>
-          <ShareOutlined />
-      {/*  */}
+        <IconButton onClick={deletePostHandler}>
+          <DeleteIcon />
         </IconButton>
-      </FlexBetween>              
+      </FlexBetween>
       {isComments && (
         <Box mt="0.5rem">
           {comments.map((comment, i) => (
@@ -117,4 +120,4 @@ const PostWidget = ({
   );
 };
 
-export default PostWidget;
+export default PostWidget 

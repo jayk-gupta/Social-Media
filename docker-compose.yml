@@ -3,8 +3,8 @@ version: '3.8'
 services:
   frontend:
     build:
-      context: client
-      dockerfile: dockerfile.frontend
+      context: ./client
+      dockerfile: Dockerfile.frontend
     ports:
       - "5173:5173"
     depends_on:
@@ -12,9 +12,16 @@ services:
 
   backend:
     build:
-      context: server
-      dockerfile: dockerfile.backend
+      context: ./server
+      dockerfile: Dockerfile.backend
     ports:
       - "3001:3001"
+    depends_on:
+      - mongodb  
     volumes:
       - ./server/.env:/app/.env
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"    

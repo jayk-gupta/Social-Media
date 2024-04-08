@@ -92,7 +92,7 @@ const UserWidget = ({ userId, picturePath }) => {
           <Typography color={medium}>{occupation}</Typography>
         </Box>
       </Box>
-    
+
       <Divider />
       {/* THIRD ROW */}
       <Box p="1rem 0">
@@ -118,7 +118,11 @@ const UserWidget = ({ userId, picturePath }) => {
             <img src="../assets/twitter.png" alt="twitter" />
             <Box>
               <Typography color={main} fontWeight="500">
-                <Link href="" target="_blank" rel="noopener">
+                <Link
+                  href="https://twitter.com/jayk_gupta"
+                  target="_blank"
+                  rel="noopener"
+                >
                   Twitter
                 </Link>
               </Typography>
@@ -132,7 +136,7 @@ const UserWidget = ({ userId, picturePath }) => {
             <Box>
               <Typography color={main} fontWeight="500">
                 <Link
-                  href="#"
+                  href="https://www.linkedin.com/in/jay-kumar-gupta-ba0434201/"
                   rel="noopener noreferrer"
                   target="_blank"
                 >

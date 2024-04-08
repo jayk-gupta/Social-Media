@@ -10,7 +10,7 @@ import Friend from "../../components/Friend";
 import WidgetWrapper from "../../components/WidgetWrapper";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPost, deletePostAsync } from "../../state/index";
+import { setPost} from "../../state/index";
 
 const PostWidget = ({
   postId,
@@ -46,6 +46,35 @@ const PostWidget = ({
     const updatedPost = await response.json();
     dispatch(setPost({ post: updatedPost }));
   };
+
+
+const deletePost = async () => {
+  try {
+    const response = await fetch(`http://localhost:3001/posts/${postId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId: loggedInUserId }),
+    });
+
+    if (response.ok) {
+      // Assuming the server responds with the updated post, adjust accordingly
+      const updatedPost = await response.json();
+
+      // Dispatch the action with the updated post
+      dispatch(setPost({ post: updatedPost }));
+    } else {
+      // Handle error if the deletion was not successful
+      console.error("Error deleting post:", response.statusText);
+    }
+  } catch (error) {
+    console.error("Error deleting post:", error.message);
+    // Handle other errors as needed
+  }
+};
+
 
   return (
     <WidgetWrapper m="2rem 0">
@@ -88,7 +117,7 @@ const PostWidget = ({
           </FlexBetween>
         </FlexBetween>
         {/* DLETE FUNCTIONALITY TO ADD ON THIS BUTTON */}
-        <IconButton>
+        <IconButton onClick={deletePost}>
           <DeleteIcon />
         </IconButton>
       </FlexBetween>
